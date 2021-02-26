@@ -1,20 +1,21 @@
-# vite-plugin-md
+# vite-plugin-render
 
 Vite plugin to render any file to a component
 
 - Render any file as Vue components
 - Use Vue components inside those template files
 
-[![NPM version](https://img.shields.io/npm/v/vite-plugin-md?color=a1b858)](https://www.npmjs.com/package/vite-plugin-md)
+This is a fork of [@antfu](https://github.com/antfu) [vite-plugin-md](https://github.com/antfu/vite-plugin-md) that 
+extracts the Markdown parts to an external render function. Many thanks for his work !
 
-> ℹ️ **0.2.x is for Vite 2 and 0.1.x is for Vite 1**
+[![NPM version](https://img.shields.io/npm/v/vite-plugin-render?color=a1b858)](https://www.npmjs.com/package/vite-plugin-render)
 
 ## Install
 
 Install
 
 ```bash
-npm i vite-plugin-md -D # yarn add vite-plugin-md -D
+npm i vite-plugin-render -D # yarn add vite-plugin-render -D
 ```
 
 Add it to `vite.config.js`, and configure the render function and file patterns includes you need.
@@ -24,7 +25,7 @@ Here's an example for Markdown using [markdown-it](https://github.com/markdown-i
 
 ```ts
 // vite.config.js
-import Render from 'vite-plugin-md'
+import Render from 'vite-plugin-render'
 const MarkdownIt = require('markdown-it')
 
 const markdown = new MarkdownIt({
@@ -139,7 +140,7 @@ npm i @vueuse/head
 ```js
 // vite.config.js
 import Vue from '@vitejs/plugin-vue'
-import Render from 'vite-plugin-md'
+import Render from 'vite-plugin-render'
 
 export default {
   plugins: [
@@ -181,7 +182,7 @@ For more options available, please refer to [`@vueuse/head`'s docs](https://gith
 
 ```ts
 // vite.config.js
-import Render from 'vite-plugin-md'
+import Render from 'vite-plugin-render'
 const MarkdownIt = require('markdown-it')
 
 const markdown = new MarkdownIt({
@@ -221,7 +222,7 @@ Or the pre-configured starter template [Vitesse](https://github.com/antfu/vitess
 
 ```ts
 // vite.config.js
-import Render from 'vite-plugin-md'
+import Render from 'vite-plugin-render'
 import Voie from 'vite-plugin-voie'
 const MarkdownIt = require('markdown-it')
 
@@ -257,7 +258,7 @@ Put your markdown under `./src/pages/xx.md`, then you can access the page via ro
 
 ```ts
 // vite.config.js
-import Render from 'vite-plugin-md'
+import Render from 'vite-plugin-render'
 import ViteComponents from 'vite-plugin-components'
 const MarkdownIt = require('markdown-it')
 
