@@ -1,4 +1,5 @@
 import type { Plugin } from 'vite'
+import { createFilter } from '@rollup/pluginutils'
 import { Options } from './types'
 import { createMarkdown } from './markdown'
 import { resolveOptions } from './options'
@@ -7,19 +8,27 @@ function VitePluginMarkdown(userOptions: Options = {}): Plugin {
   const options = resolveOptions(userOptions)
   const markdownToVue = createMarkdown(options)
 
+  const filter = createFilter(
+      options.include,
+      options.exclude
+  )
+
   return {
     name: 'vite-plugin-md',
     enforce: 'pre',
     transform(raw, id) {
-      if (id.endsWith('.md'))
-        return markdownToVue(id, raw)
+      if (!filter(id)) {
+        return
+      }
+      return markdownToVue(id, raw)
     },
     async handleHotUpdate(ctx) {
-      if (ctx.file.endsWith('.md')) {
-        const defaultRead = ctx.read
-        ctx.read = async function() {
-          return markdownToVue(ctx.file, await defaultRead())
-        }
+      if (!filter(ctx.file)) {
+        return
+      }
+      const defaultRead = ctx.read
+      ctx.read = async function() {
+        return markdownToVue(ctx.file, await defaultRead())
       }
     },
   }

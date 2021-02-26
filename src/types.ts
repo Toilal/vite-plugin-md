@@ -3,6 +3,17 @@ import type MarkdownIt from 'markdown-it'
 
 export interface Options {
   /**
+   * Filename regular expressions to include
+   *
+   * @default [/\.md/]
+   */
+  include?: string | RegExp | (string | RegExp)[]
+  /**
+   * Filename regular expressions to exclude
+   */
+  exclude?: string | RegExp | (string | RegExp)[]
+
+  /**
    * Enable head support, need to install @vueuse/head and register to App in main.js
    *
    * @default false

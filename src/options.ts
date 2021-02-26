@@ -4,6 +4,7 @@ import { toArray } from './utils'
 
 export function resolveOptions(userOptions: Options): ResolvedOptions {
   const options = Object.assign({
+    include: /\.md$/,
     headEnabled: false,
     headField: '',
     customSfcBlocks: ['route', 'i18n'],
