@@ -1,9 +1,9 @@
 # vite-plugin-md
 
-Markdown for Vite
+Vite plugin to render any file to a component
 
-- Use Markdown as Vue components
-- Use Vue components in Markdown
+- Render any file as Vue components
+- Use Vue components inside those template files
 
 [![NPM version](https://img.shields.io/npm/v/vite-plugin-md?color=a1b858)](https://www.npmjs.com/package/vite-plugin-md)
 
@@ -17,26 +17,40 @@ Install
 npm i vite-plugin-md -D # yarn add vite-plugin-md -D
 ```
 
-Add it to `vite.config.js`
+Add it to `vite.config.js`, and configure the render function and file patterns includes you need.
+
+Here's an example for Markdown using [markdown-it](https://github.com/markdown-it/markdown-it) as the renderer on 
+`*.md` files, but you can adjust to any template engine.
 
 ```ts
 // vite.config.js
-import Vue from '@vitejs/plugin-vue'
-import Markdown from 'vite-plugin-md'
+import Render from 'vite-plugin-md'
+const MarkdownIt = require('markdown-it')
+
+const markdown = new MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: true
+})
 
 export default {
   plugins: [
     Vue({
       include: [/\.vue$/, /\.md$/], // <--
     }),
-    Markdown()
+    Render({
+      include: [/\.md$/],
+      render: (content: string) => {
+          return markdown.render(content)
+      }
+    }),
   ],
 }
 ```
 
 And import it as a normal Vue component
 
-## Import Markdown as Vue components
+## Import any file as Vue components
 
 ```html
 <template>
@@ -54,9 +68,9 @@ export default {
 </script>
 ```
 
-## Use Vue Components inside Markdown
+## Use Vue Components inside source file
 
-You can even use Vue components inside your markdown, for example
+You can even use Vue components inside your source file, for example
 
 ```html
 <Counter :init='5'/>
@@ -125,14 +139,14 @@ npm i @vueuse/head
 ```js
 // vite.config.js
 import Vue from '@vitejs/plugin-vue'
-import Markdown from 'vite-plugin-md'
+import Render from 'vite-plugin-md'
 
 export default {
   plugins: [
     Vue({
       include: [/\.vue$/, /\.md$/],
     }),
-    Markdown({
+    Render({
       headEnabled: true // <--
     })
   ]
@@ -165,31 +179,30 @@ For more options available, please refer to [`@vueuse/head`'s docs](https://gith
 
 ## Options
 
-`vite-plugin-md` uses [`markdown-it`](https://github.com/markdown-it/markdown-it) under the hood, see [`markdown-it`'s docs](https://markdown-it.github.io/markdown-it/) for more details
-
 ```ts
 // vite.config.js
-import Markdown from 'vite-plugin-md'
+import Render from 'vite-plugin-md'
+const MarkdownIt = require('markdown-it')
+
+const markdown = new MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: true
+})
 
 export default {
   plugins: [
-    Markdown({
-      // default options passed to markdown-it
-      // see: https://markdown-it.github.io/markdown-it/
-      markdownItOptions: {
-        html: true,
-        linkify: true,
-        typographer: true,
-      },
-      // A function providing the Markdown It instance gets the ability to apply custom settings/plugins
-      markdownItSetup(md) {
-        // for example
-        md.use(require('markdown-it-anchor'))
-        md.use(require('markdown-it-prism'))
+    Vue({
+      include: [/\.vue$/, /\.md$/], // <--
+    }),
+    Render({
+      include: [/\.md$/],
+      render: (content: string) => {
+          return markdown.render(content)
       },
       // Class names for the wrapper div
       wrapperClasses: 'markdown-body'
-    })
+    }),
   ],
 }
 ```
@@ -207,15 +220,30 @@ Or the pre-configured starter template [Vitesse](https://github.com/antfu/vitess
 ### Work with [vite-plugin-voie](https://github.com/vamplate/vite-plugin-voie)
 
 ```ts
-import Markdown from 'vite-plugin-md'
+// vite.config.js
+import Render from 'vite-plugin-md'
 import Voie from 'vite-plugin-voie'
+const MarkdownIt = require('markdown-it')
+
+const markdown = new MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: true
+})
 
 export default {
   plugins: [
     Voie({
       extensions: ['vue', 'md'],
     }),
-    Markdown()
+    Render({
+      include: [/\.md$/],
+      render: (content: string) => {
+          return markdown.render(content)
+      },
+      // Class names for the wrapper div
+      wrapperClasses: 'markdown-body'
+    }),
   ],
 }
 ```
@@ -228,12 +256,25 @@ Put your markdown under `./src/pages/xx.md`, then you can access the page via ro
 `vite-plugin-components` allows you to do on-demand components auto importing without worrying about registration.
 
 ```ts
-import Markdown from 'vite-plugin-md'
+// vite.config.js
+import Render from 'vite-plugin-md'
 import ViteComponents from 'vite-plugin-components'
+const MarkdownIt = require('markdown-it')
+
+const markdown = new MarkdownIt({
+  html: true,
+  linkify: true,
+  typographer: true
+})
 
 export default {
   plugins: [
-    Markdown(),
+    Render({
+      include: [/\.md$/],
+      render: (content: string) => {
+          return markdown.render(content)
+      }
+    }),
     // should be placed after `Markdown()`
     ViteComponents({
       // allow auto load markdown components under `./src/components/`

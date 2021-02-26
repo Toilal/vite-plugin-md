@@ -3,15 +3,23 @@ import { Options, ResolvedOptions } from './types'
 import { toArray } from './utils'
 
 export function resolveOptions(userOptions: Options): ResolvedOptions {
+  if (Object.keys(userOptions).length == 0) {
+    throw new Error('[vite-plugin-render] `include` and `render` are mandatory options.')
+  }
+
+  if (!userOptions.include) {
+    throw new Error('[vite-plugin-render] `include` is a mandatory option.')
+  }
+
+  if (!userOptions.render) {
+    throw new Error('[vite-plugin-render] `render` is a mandatory option.')
+  }
+
   const options = Object.assign({
-    include: /\.md$/,
     headEnabled: false,
     headField: '',
     customSfcBlocks: ['route', 'i18n'],
-    markdownItOptions: {},
-    markdownItUses: [],
-    markdownItSetup: () => {},
-    wrapperClasses: 'markdown-body',
+    wrapperClasses: 'render-body',
     wrapperComponent: null,
     transforms: {},
     frontmatterPreprocess: (frontmatter: any, options: ResolvedOptions) => {

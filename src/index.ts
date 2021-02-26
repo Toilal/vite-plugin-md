@@ -1,12 +1,12 @@
 import type { Plugin } from 'vite'
 import { createFilter } from '@rollup/pluginutils'
-import { Options } from './types'
-import { createMarkdown } from './markdown'
+import {UserOptions} from './types'
+import { renderFactory } from './render'
 import { resolveOptions } from './options'
 
-function VitePluginMarkdown(userOptions: Options = {}): Plugin {
+function VitePluginRender(userOptions: UserOptions = {} as UserOptions): Plugin {
   const options = resolveOptions(userOptions)
-  const markdownToVue = createMarkdown(options)
+  const render = renderFactory(options)
 
   const filter = createFilter(
       options.include,
@@ -14,13 +14,13 @@ function VitePluginMarkdown(userOptions: Options = {}): Plugin {
   )
 
   return {
-    name: 'vite-plugin-md',
+    name: 'vite-plugin-render',
     enforce: 'pre',
     transform(raw, id) {
       if (!filter(id)) {
         return
       }
-      return markdownToVue(id, raw)
+      return render(id, raw)
     },
     async handleHotUpdate(ctx) {
       if (!filter(ctx.file)) {
@@ -28,10 +28,10 @@ function VitePluginMarkdown(userOptions: Options = {}): Plugin {
       }
       const defaultRead = ctx.read
       ctx.read = async function() {
-        return markdownToVue(ctx.file, await defaultRead())
+        return render(ctx.file, await defaultRead())
       }
     },
   }
 }
 
-export default VitePluginMarkdown
+export default VitePluginRender

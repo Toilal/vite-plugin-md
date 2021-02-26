@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-md",
-  "description": "Markdown for Vite",
+  "description": "Vite plugin to render any file to a component",
   "version": "0.5.1",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -20,7 +20,8 @@
   "keywords": [
     "vite",
     "vite-plugin",
-    "markdown-it"
+    "render",
+    "templates"
   ],
   "scripts": {
     "dev": "npm run build -- --watch",
@@ -31,12 +32,11 @@
     "release": "git-ensure --no-behind -b main --clean && bumpp --commit --tag --push"
   },
   "peerDependencies": {
-    "vite": "^2.0.0-beta.1"
+    "vite": "^2.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.4.3",
     "@antfu/ni": "^0.5.4",
-    "@types/markdown-it": "^12.0.1",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@vue/compiler-sfc": "^3.0.5",
     "bumpp": "^6.0.6",
@@ -49,7 +49,6 @@
     "vite": "^2.0.0"
   },
   "dependencies": {
-    "gray-matter": "^4.0.2",
-    "markdown-it": "^12.0.4"
+    "gray-matter": "^4.0.2"
   }
 }

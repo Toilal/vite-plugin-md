@@ -1,11 +1,7 @@
 /* eslint-disable no-use-before-define */
-import type MarkdownIt from 'markdown-it'
-
 export interface Options {
   /**
    * Filename regular expressions to include
-   *
-   * @default [/\.md/]
    */
   include?: string | RegExp | (string | RegExp)[]
   /**
@@ -38,24 +34,20 @@ export interface Options {
   /**
    * Custom function to process the frontmatter
    */
-  frontmatterPreprocess?: (frontmatter: any, options: ResolvedOptions) => any
+  frontmatterPreprocess?: (frontmatter: any, options: ResolvedOptions) => FrontmatterData
 
   /**
-   * Options passed to Markdown It
+   * Render function
+   *
+   * @param content content
+   * @param matterData data retrieve with gray-matter
    */
-  markdownItOptions?: MarkdownIt.Options
-  /**
-   * Plugins for Markdown It
-   */
-  markdownItUses?: (MarkdownIt.PluginSimple | [MarkdownIt.PluginSimple | MarkdownIt.PluginWithOptions<any>, any] | any)[]
-  /**
-   * A function providing the Markdown It instance gets the ability to apply custom settings/plugins
-   */
-  markdownItSetup?: (MarkdownIt: MarkdownIt) => void
+  render? (content: string, matterData?: { head: any, frontmatter: any }): string
+
   /**
    * Class names for wrapper div
    *
-   * @default 'markdown-body'
+   * @default 'render-body'
    */
   wrapperClasses?: string | string[]
   /**
@@ -65,7 +57,7 @@ export interface Options {
    */
   wrapperComponent?: string | undefined | null
   /**
-   * Custom tranformations apply before and after the markdown transformation.
+   * Custom tranformations apply before and after the rendering.
    */
   transforms?: {
     before?: (code: string, id: string) => string
@@ -73,6 +65,13 @@ export interface Options {
   }
 }
 
+export type UserOptions = Options & Required<Pick<Options, "include" | "render">>
+
 export interface ResolvedOptions extends Required<Options> {
   wrapperClasses: string
+}
+
+export interface FrontmatterData {
+  head: any
+  frontmatter: any
 }

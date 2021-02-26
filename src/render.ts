@@ -1,4 +1,3 @@
-import MarkdownIt from 'markdown-it'
 import matter from 'gray-matter'
 import { ResolvedOptions } from './types'
 import { toArray } from './utils'
@@ -22,32 +21,18 @@ function removeCustomBlock(html: string, options: ResolvedOptions) {
   return html
 }
 
-export function createMarkdown(options: ResolvedOptions) {
-  const markdown = new MarkdownIt({
-    html: true,
-    linkify: true,
-    typographer: true,
-    ...options.markdownItOptions,
-  })
-
-  options.markdownItUses.forEach((e) => {
-    const [plugin, options] = toArray(e)
-
-    markdown.use(plugin, options)
-  })
-
-  options.markdownItSetup(markdown)
-
+export function renderFactory(options: ResolvedOptions) {
   return (id: string, raw: string) => {
     const { wrapperClasses, wrapperComponent, transforms, headEnabled, frontmatterPreprocess } = options
 
     if (transforms.before)
       raw = transforms.before(raw, id)
 
-    const { content: md, data } = matter(raw)
-    const { head, frontmatter } = frontmatterPreprocess(data, options)
+    const { content, data } = matter(raw)
+    const frontmatterData = frontmatterPreprocess(data, options)
 
-    let html = markdown.render(md, {})
+    let html = options.render(content, frontmatterData)
+    const { head, frontmatter } = frontmatterData
 
     if (wrapperClasses)
       html = `<div class="${wrapperClasses}">${html}</div>`

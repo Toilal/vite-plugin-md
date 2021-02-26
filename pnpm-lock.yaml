@@ -2,11 +2,9 @@ importers:
   .:
     dependencies:
       gray-matter: 4.0.2
-      markdown-it: 12.0.4
     devDependencies:
       '@antfu/eslint-config': 0.4.3_eslint@7.20.0+typescript@4.1.5
       '@antfu/ni': 0.5.4
-      '@types/markdown-it': 12.0.1
       '@typescript-eslint/eslint-plugin': 4.15.1_eslint@7.20.0+typescript@4.1.5
       '@vue/compiler-sfc': 3.0.5
       bumpp: 6.0.6
@@ -20,14 +18,12 @@ importers:
     specifiers:
       '@antfu/eslint-config': ^0.4.3
       '@antfu/ni': ^0.5.4
-      '@types/markdown-it': ^12.0.1
       '@typescript-eslint/eslint-plugin': ^4.15.1
       '@vue/compiler-sfc': ^3.0.5
       bumpp: ^6.0.6
       eslint: ^7.20.0
       git-ensure: ^0.0.6
       gray-matter: ^4.0.2
-      markdown-it: ^12.0.4
       rollup: ^2.39.0
       standard-version: ^9.1.0
       tsup: ^3.12.1
@@ -46,7 +42,7 @@ importers:
       prismjs: 1.23.0
       typescript: 4.1.5
       vite: 2.0.0
-      vite-plugin-md: 'link:..'
+      vite-plugin-md: link:..
       vite-plugin-pages: 0.4.3_vite@2.0.0+vue@3.0.5
     specifiers:
       '@vitejs/plugin-vue': ^1.1.4
@@ -57,7 +53,7 @@ importers:
       prismjs: ^1.23.0
       typescript: ^4.1.5
       vite: ^2.0.0
-      vite-plugin-md: 'workspace:*'
+      vite-plugin-md: workspace:*
       vite-plugin-pages: ^0.4.3
       vue: ^3.0.5
       vue-router: ^4.0.3
@@ -325,10 +321,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
-  /@types/highlight.js/9.12.4:
-    dev: true
-    resolution:
-      integrity: sha512-t2szdkwmg2JJyuCM20e8kR2X59WCE5Zkl4bzm1u1Oukjm79zpbiAv+QjnwLnuuV0WHEcX2NgUItu0pAMKuOPww==
   /@types/json-schema/7.0.6:
     dev: true
     resolution:
@@ -337,22 +329,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
-  /@types/linkify-it/3.0.0:
-    dev: true
-    resolution:
-      integrity: sha512-x9OaQQTb1N2hPZ/LWJsqushexDvz7NgzuZxiRmZio44WPuolTZNHDBCrOxCzRVOMwamJRO2dWax5NbygOf1OTQ==
-  /@types/markdown-it/12.0.1:
-    dependencies:
-      '@types/highlight.js': 9.12.4
-      '@types/linkify-it': 3.0.0
-      '@types/mdurl': 1.0.2
-    dev: true
-    resolution:
-      integrity: sha512-mHfT8j/XkPb1uLEfs0/C3se6nd+webC2kcqcy8tgcVr0GDEONv/xaQzAN+aQvkxQXk/jC0Q6mPS+0xhFwRF35g==
-  /@types/mdurl/1.0.2:
-    dev: true
-    resolution:
-      integrity: sha512-eC4U9MlIcu2q0KQmXszyn5Akca/0jrQmwDRgpAMJai7qBWq4amIQhZyNau4VYGtCeALvW1/NtjzJJ567aZxfKA==
   /@types/minimist/1.2.1:
     dev: true
     resolution:
@@ -592,8 +568,8 @@ packages:
       integrity: sha512-HSOSe2XSPuCkp20h4+HXSiPH9qkhz6YbW9z9ZtL5vef2T2PMugH7/osIFVSrRZP/Ul5twFZ7MIRlp8tPX6e4/g==
   /@vue/compiler-sfc/3.0.5:
     dependencies:
-      '@babel/parser': 7.12.11
-      '@babel/types': 7.12.12
+      '@babel/parser': 7.12.16
+      '@babel/types': 7.12.13
       '@vue/compiler-core': 3.0.5
       '@vue/compiler-dom': 3.0.5
       '@vue/compiler-ssr': 3.0.5
@@ -775,10 +751,6 @@ packages:
       sprintf-js: 1.0.3
     resolution:
       integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==
-  /argparse/2.0.1:
-    dev: false
-    resolution:
-      integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
   /array-back/3.1.0:
     dev: true
     engines:
@@ -1648,6 +1620,7 @@ packages:
     resolution:
       integrity: sha512-yjNnPr315/FjS4zIsUxYguYUPP2e1NK4d7E7ZOLiyYCcbFBiTMyID+2wvm2w6+pZ/odMA7cRkjhsPbltwBOrLg==
   /entities/2.1.0:
+    dev: true
     resolution:
       integrity: sha512-hCx1oky9PFrJ611mf0ifBLBRW8lUUVRlFolb5gWRfIELabBlbp9xZvrqZLZAs+NxFnbfQoeGd8wDkygjg7U85w==
   /error-ex/1.3.2:
@@ -3000,12 +2973,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
-  /linkify-it/3.0.2:
-    dependencies:
-      uc.micro: 1.0.6
-    dev: false
-    resolution:
-      integrity: sha512-gDBO4aHNZS6coiZCKVhSNh43F9ioIL4JwRjLZPkoLIY4yZFwg264Y5lu2x6rb1Js42Gh6Yqm2f6L2AJcnkzinQ==
   /load-json-file/1.1.0:
     dependencies:
       graceful-fs: 4.2.4
@@ -3190,21 +3157,6 @@ packages:
       node: '>=6.0.0'
     resolution:
       integrity: sha512-KjQBiGkSQPivHN7+kDxQy6qKJe3YWLfHqaD97XGVCkwlt2w6zrbJh9xuQvn+sFGhJxiMwIjjHspFIi0YRrLQtQ==
-  /markdown-it/12.0.4:
-    dependencies:
-      argparse: 2.0.1
-      entities: 2.1.0
-      linkify-it: 3.0.2
-      mdurl: 1.0.1
-      uc.micro: 1.0.6
-    dev: false
-    hasBin: true
-    resolution:
-      integrity: sha512-34RwOXZT8kyuOJy25oJNJoulO8L0bTHYWXcdZBYZqFnjIy3NgjeoM3FmPXIOFQ26/lSHYMr8oc62B6adxXcb3Q==
-  /mdurl/1.0.1:
-    dev: false
-    resolution:
-      integrity: sha1-/oWy7HWlkDfyrf7BAP1sYBdhFS4=
   /meow/3.7.0:
     dependencies:
       camelcase-keys: 2.1.0
@@ -4794,10 +4746,6 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-VAH4IvQ7BDFYglMd7BPRDfLgxZZX4O4TFcRDA6EN5X7erNJJq+McIEp8np9aVtxrCJ6qx4GTYVfOWNjcqwZgRw==
-  /uc.micro/1.0.6:
-    dev: false
-    resolution:
-      integrity: sha512-8Y75pvTYkLJW2hWQHXxoqRgV7qb9B+9vFEtidML+7koHUFapnVJAZ6cKs+Qjz5Aw3aZWHMC6u0wJE3At+nSGwA==
   /uglify-js/3.12.4:
     dev: true
     engines:
